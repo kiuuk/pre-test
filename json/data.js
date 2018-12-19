@@ -1,4 +1,4 @@
-var TABLE_DATA = 
+
 [
   {
     "id": "5",
