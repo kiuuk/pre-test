@@ -27,13 +27,25 @@
     xmlhttp.send();
 })();
 
+const table = document.querySelector('.table');
+const rows = table.rows;
+
+// timer
+let setTimer = null;
+function startTimer() {setTimer = setInterval(randomize, 1000);}
+function stopTimer() {clearInterval(setTimer);}
+function randomize() {
+    let rowNum = Math.floor(Math.random() * 9) + 1;
+    console.log(rowNum);
+    rows[rowNum].parentNode.insertBefore(rows[rowNum + 1], rows[rowNum]);
+}
+
+// sort
 function sortTable() {
-    let table, rows, switching, i, x, y, shouldSwitch;
-    table = document.querySelector('.table');
+    let switching, i, x, y, shouldSwitch;
     switching = true;
     while (switching) {
         switching = false;
-        rows = table.rows;
         for (i = 1; i < (rows.length - 1); i++) {
             shouldSwitch = false;
             x = rows[i].getElementsByTagName("td")[3];
