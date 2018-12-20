@@ -18,7 +18,7 @@
 
                 cell1.innerHTML = jsonDatas[i].id;
                 cell2.innerHTML = '<img src=' + jsonDatas[i].thumbnailUrl + ' />';
-                cell3.innerHTML = jsonDatas[i].name.replace(/(<([^>]+)>)/gi, "");
+                cell3.innerHTML = jsonDatas[i].name.replace(/(<([^>]+)>)/, "");
                 cell4.innerHTML = jsonDatas[i].price;
             }
         }
