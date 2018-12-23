@@ -34,5 +34,19 @@
 </div>
 <script src="json/data.js"></script>
 <script src="js/app.js"></script>
+<script>
+    const json = TABLE_DATA;
+    let jsonTable = '';
+    for (i=0;i<json.length;i++) {
+      jsonTable = jsonTable + '<tr>' + 
+        '<td>' + json[i].id + '</td>' +
+        '<td>' + '<img src="' + json[i].thumbnailUrl + '" />' + '</td>' +
+        '<td>' + json[i].name.replace(/(<([^>]+)>)/, "") + '</td>' +
+        '<td>' + json[i].price + '</td>' +
+        '</tr>';
+    };
+    // console.log(jsonTable);
+    document.querySelector("#tBody").innerHTML = jsonTable;
+</script>
 </body>
 </html>
