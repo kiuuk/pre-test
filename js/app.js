@@ -32,8 +32,12 @@ const rows = table.rows;
 
 // timer
 let setTimer = null;
-function startTimer() {setTimer = setInterval(randomize, 1000);}
-function stopTimer() {clearInterval(setTimer);}
+
+// btn
+document.getElementById('start').addEventListener('click', () => setTimer = setInterval(randomize, 1000));
+document.getElementById('stop').addEventListener('click', () => clearInterval(setTimer));
+document.getElementById('sort').addEventListener('click', sortTable);
+
 function randomize() {
     let rowNum = Math.floor(Math.random() * 9) + 1;
     // console.log(rowNum);
