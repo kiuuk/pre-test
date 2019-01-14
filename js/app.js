@@ -27,41 +27,63 @@
 //     xmlhttp.send();
 // })();
 
-const table = document.querySelector('.table');
-const rows = table.rows;
+const json = TABLE_DATA;
+let jsonTable = "";
+for (i = 0; i < json.length; i++) {
+  jsonTable =
+    jsonTable +
+    `
+        <tr>
+          <td>${filterTags(json[i].id)}</td>  
+          <td><img src="${filterTags(json[i].thumbnailUrl)}" /></td>  
+          <td>${filterTags(json[i].name)}</td>  
+          <td>${filterTags(json[i].price)}</td>  
+        </tr>
+      `;
+}
+// console.log(jsonTable);
+document.querySelector("#tBody").innerHTML = jsonTable;
+
+// tag filter
+function filterTags(str) {
+  return /(<([^>]+)>)/gi.test(str) ? (str = "") : str;
+}
 
 // timer
 let setTimer = null;
 
 // btn
-document.getElementById('start').addEventListener('click', () => setTimer = setInterval(randomize, 1000));
-document.getElementById('stop').addEventListener('click', () => clearInterval(setTimer));
-document.getElementById('sort').addEventListener('click', sortTable);
+document.getElementById("start").addEventListener("click", () => (setTimer = setInterval(randomize, 1000)));
+document.getElementById("stop").addEventListener("click", () => clearInterval(setTimer));
+document.getElementById("sort").addEventListener("click", sortTable);
+
+const table = document.querySelector(".table");
+const rows = table.rows;
 
 function randomize() {
-    let rowNum = Math.floor(Math.random() * 9) + 1;
-    // console.log(rowNum);
-    rows[rowNum].parentNode.insertBefore(rows[rowNum + 1], rows[rowNum]);
+  let rowNum = Math.floor(Math.random() * 9) + 1;
+  // console.log(rowNum);
+  rows[rowNum].parentNode.insertBefore(rows[rowNum + 1], rows[rowNum]);
 }
 
 // sort
 function sortTable() {
-    let switching, i, x, y, shouldSwitch;
-    switching = true;
-    while (switching) {
-        switching = false;
-        for (i = 1; i < (rows.length - 1); i++) {
-            shouldSwitch = false;
-            x = rows[i].getElementsByTagName("td")[3];
-            y = rows[i + 1].getElementsByTagName("td")[3];
-            if (Number(x.innerHTML) < Number(y.innerHTML)) {
-                shouldSwitch = true;
-                break;
-            }
-        }
-        if (shouldSwitch) {
-            rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
-            switching = true;
-        }
+  let switching, i, x, y, shouldSwitch;
+  switching = true;
+  while (switching) {
+    switching = false;
+    for (i = 1; i < rows.length - 1; i++) {
+      shouldSwitch = false;
+      x = rows[i].getElementsByTagName("td")[3];
+      y = rows[i + 1].getElementsByTagName("td")[3];
+      if (Number(x.innerHTML) < Number(y.innerHTML)) {
+        shouldSwitch = true;
+        break;
+      }
     }
+    if (shouldSwitch) {
+      rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+      switching = true;
+    }
+  }
 }
